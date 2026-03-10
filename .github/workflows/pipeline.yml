@@ -60,3 +60,4 @@ jobs:
           cache: maven
       - name: Generate Coverage Report
         run: mvn jacoco:report
+
