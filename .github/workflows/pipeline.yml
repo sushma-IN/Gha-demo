@@ -25,7 +25,7 @@ jobs:
         run: echo "Secret successfully loaded"
 
       - name: Maven Build using Piper
-        uses: SAP/project-piper-action@v43.0.0
+        uses: SAP/project-piper-action@v1.26.0
         with:
           step-name: mavenExecute
           flags: "--goals clean package"
