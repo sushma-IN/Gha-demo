@@ -23,7 +23,7 @@ jobs:
           MY_SECRET: ${{ secrets.MY_SECRET }}
         run: echo "Secret loaded successfully"
 
-      - uses: SAP/project-piper-action@v43.0.0
+      - uses: SAP/project-piper-action@v1.26.2
         name: mavenExecute
         with:
           step-name: mavenExecute
