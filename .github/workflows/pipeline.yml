@@ -17,6 +17,10 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+      - name: Using secret as environment variable
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
+        run: echo "Secret value is $MY_SECRET"
       - name: Build with Maven
         run: mvn clean package
       - name: Upload JAR Artifact
