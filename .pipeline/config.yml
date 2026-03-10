@@ -1,0 +1,8 @@
+general:
+  buildTool: maven
+
+steps:
+  mavenExecute:
+    goals:
+      - clean
+      - package
