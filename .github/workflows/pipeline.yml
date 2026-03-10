@@ -17,17 +17,18 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Prepare Maven repo
-        run: mkdir -p $HOME/.m2/repository
+      - name: Prepare Maven repository
+        run: |
+          mkdir -p /home/runner/.m2/repository
+          chmod -R 755 /home/runner/.m2
 
-      - name: Run Maven Build with Piper
+      - name: Maven Build using Piper
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
         env:
           PIPER_ciMode: "true"
           WORKSPACE: ${{ github.workspace }}
-          MAVEN_OPTS: "-Dmaven.repo.local=$HOME/.m2/repository"
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4

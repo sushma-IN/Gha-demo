@@ -3,6 +3,11 @@ general:
 
 steps:
   mavenExecute:
+    localRepositoryPath: /home/runner/.m2/repository
     goals:
       - clean
+      - compile
       - package
+    globalSettingsFile: ""
+    projectSettingsFile: ""
+    m2Path: /home/runner/.m2
