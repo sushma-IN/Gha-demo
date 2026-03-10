@@ -18,15 +18,21 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Prepare Maven repository
+        run: mkdir -p $HOME/.m2/repository
+
       - name: Use Secret
         env:
           MY_SECRET: ${{ secrets.MY_SECRET }}
         run: echo "Secret loaded successfully"
-
-      - uses: SAP/project-piper-action@v1.26.2
-        name: mavenExecute
+      - name: Run Maven Build with Piper
+        uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
+
+        env:
+          MAVEN_OPTS: "-Dmaven.repo.local=$HOME/.m2/repository"
+
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
