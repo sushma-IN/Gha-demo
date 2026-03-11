@@ -6,4 +6,3 @@ steps:
     goals:
       - clean
       - package
-    m2Path: "/root/.m2"

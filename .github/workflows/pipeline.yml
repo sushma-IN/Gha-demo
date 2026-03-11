@@ -17,7 +17,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Run Maven Build with Piper
+      - name: Run Piper Maven Build
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
