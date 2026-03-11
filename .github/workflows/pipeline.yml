@@ -16,6 +16,12 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Create Maven Repository Directory
+        run: |
+          mkdir -p $HOME/.m2/repository
+          chmod -R 755 $HOME/.m2
 
       - name: Run Piper Maven Build
         uses: SAP/project-piper-action@v1.26.2
