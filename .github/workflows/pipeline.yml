@@ -3,8 +3,6 @@ name: CI Pipeline
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 jobs:
   build:
@@ -12,22 +10,27 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-      - name: Using secret as environment variable
-        env:
-          MY_SECRET: ${{ secrets.MY_SECRET }}
-        run: echo "Secret value is $MY_SECRET"
 
-      - name: Run Piper Maven Build
+      - name: Create Maven directory
+        run: |
+          mkdir -p /home/runner/.m2
+          mkdir -p /home/runner/.m2/repository
+          chmod -R 777 /home/runner/.m2
+
+      - name: Run Maven with Piper
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
+        env:
+          MAVEN_OPTS: "-Dmaven.repo.local=/home/runner/.m2/repository"
 
-      - name: Upload artifact
+      - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
           name: gha-demo-jar
