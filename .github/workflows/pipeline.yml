@@ -11,24 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Create Maven directory
-        run: |
-          mkdir -p /home/runner/.m2
-          mkdir -p /home/runner/.m2/repository
-          chmod -R 777 /home/runner/.m2
-
-      - name: Run Maven with Piper
+      - name: Run Maven build with Piper
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
-        env:
-          MAVEN_OPTS: "-Dmaven.repo.local=/home/runner/.m2/repository"
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
