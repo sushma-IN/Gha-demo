@@ -6,3 +6,6 @@ steps:
     goals:
       - clean
       - package
+    projectSettingsFile: pom.xml
+    globalSettingsFile: ""
+    m2Path: .m2
