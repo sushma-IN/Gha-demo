@@ -47,8 +47,10 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: Run Tests
-        run: mvn test
+      - uses: SAP/project-piper-action@master
+        name: Run Test
+        with:
+          step-name: mavenTest
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
         with:
@@ -66,8 +68,10 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: Generate Coverage Report
-        run: mvn jacoco:report
+      - uses: SAP/project-piper-action@master
+        name: Run coverage
+        with:
+          step-name: mavenCoverage
       - name: Upload Coverage Reports
         uses: actions/upload-artifact@v4
         with:
