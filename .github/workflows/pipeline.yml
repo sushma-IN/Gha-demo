@@ -23,7 +23,7 @@ jobs:
 #          mkdir -p $HOME/.m2/repository
 #          chmod -R 755 $HOME/.m2
 
-      - uses: SAP/project-piper-action@releaseCommitSHA
+      - uses: SAP/project-piper-action@master
         name: Run Piper Maven Build
         with:
           step-name: mavenExecute
