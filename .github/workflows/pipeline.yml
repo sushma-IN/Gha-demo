@@ -47,11 +47,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: Download Target Directory
-        uses: actions/download-artifact@v4
-        with:
-          name: target-classes
-          path: target/
       - name: Run Tests
         run: mvn test
       - name: Upload Test Results
