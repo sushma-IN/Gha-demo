@@ -30,6 +30,11 @@ jobs:
         with:
           name: gha-demo-jar
           path: target/*.jar
+      - name: Upload Target Directory for Tests
+        uses: actions/upload-artifact@v4
+        with:
+          name: target-classes
+          path: target/
 
   test:
     runs-on: ubuntu-latest
@@ -42,14 +47,20 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: Download JAR Artifact
+      - name: Download Target Directory
         uses: actions/download-artifact@v4
         with:
-          name: gha-demo-jar
+          name: target-classes
+          path: target/
       - uses: SAP/project-piper-action@master
         name: Run Tests
         with:
           step-name: mavenTest
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: target/surefire-reports/
 
   coverage:
     runs-on: ubuntu-latest
@@ -62,8 +73,23 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+      - name: Download Target Directory
+        uses: actions/download-artifact@v4
+        with:
+          name: target-classes
+          path: target/
+      - name: Download Test Results
+        uses: actions/download-artifact@v4
+        with:
+          name: test-results
+          path: target/surefire-reports/
       - uses: SAP/project-piper-action@master
         name: Generate Coverage Report
         with:
           step-name: mavenExecute
           flags: 'jacoco:report'
+      - name: Upload Coverage Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: target/site/jacoco/
