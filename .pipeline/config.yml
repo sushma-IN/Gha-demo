@@ -6,5 +6,5 @@ steps:
     goals:
       - clean
       - package
-    defines:
-      - "-Dmaven.repo.local=/home/runner/.m2/repository"
+#    defines:
+#      - "-Dmaven.repo.local=/home/runner/.m2/repository"

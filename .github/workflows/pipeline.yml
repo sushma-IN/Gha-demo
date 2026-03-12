@@ -18,17 +18,17 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Create Maven Repository Directory
-        run: |
-          mkdir -p $HOME/.m2/repository
-          chmod -R 755 $HOME/.m2
+#      - name: Create Maven Repository Directory
+#        run: |
+#          mkdir -p $HOME/.m2/repository
+#          chmod -R 755 $HOME/.m2
 
-      - name: Run Piper Maven Build
-        uses: SAP/project-piper-action@v1.26.2
+      - uses: SAP/project-piper-action@releaseCommitSHA
+        name: Run Piper Maven Build
         with:
           step-name: mavenExecute
-        env:
-          HOME: /home/runner
+#        env:
+#          HOME: /home/runner
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
