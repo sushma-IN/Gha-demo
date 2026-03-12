@@ -51,11 +51,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: gha-demo-jar
-          path: target/classes/
-      - uses: SAP/project-piper-action@master
-        name: Run Tests
-        with:
-          step-name: mavenTest
+      - name: Run Tests
+        run: mvn test
+
   coverage:
     runs-on: ubuntu-latest
     needs: test
