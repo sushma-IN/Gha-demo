@@ -47,12 +47,18 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: Download JAR Artifact
+      - name: Download Target Directory
         uses: actions/download-artifact@v4
         with:
-          name: gha-demo-jar
+          name: target-classes
+          path: target/
       - name: Run Tests
         run: mvn test
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: target/surefire-reports/
 
   coverage:
     runs-on: ubuntu-latest
@@ -65,5 +71,20 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+      - name: Download Target Directory
+        uses: actions/download-artifact@v4
+        with:
+          name: target-classes
+          path: target/
+      - name: Download Test Results
+        uses: actions/download-artifact@v4
+        with:
+          name: test-results
+          path: target/surefire-reports/
       - name: Generate Coverage Report
         run: mvn jacoco:report
+      - name: Upload Coverage Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: target/site/jacoco/
