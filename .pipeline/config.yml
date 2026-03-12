@@ -9,9 +9,3 @@ steps:
       - package
 #    defines:
 #      - "-Dmaven.repo.local=/home/runner/.m2/repository"
-  mavenTest:
-    goals:
-      - test
-  mavenCoverage:
-    goals:
-      - jacoco:report
