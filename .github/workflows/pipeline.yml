@@ -28,23 +28,23 @@ jobs:
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
+          flags: --goals clean,compile,test-compile,package
         env:
           HOME: ${{ github.workspace }}
           PIPER_CONFIG_FILE: ".pipeline/config.yml"
-          PIPER_goals: "clean,compile,test-compile,package"
 
       - name: Run Tests
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenTest
+          flags: --goals test
         env:
           HOME: ${{ github.workspace }}
-          PIPER_goals: "test"
 
       - name: Generate Coverage
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenCoverage
+          flags: --goals jacoco:report
         env:
           HOME: ${{ github.workspace }}
-          PIPER_goals: "jacoco:report"
