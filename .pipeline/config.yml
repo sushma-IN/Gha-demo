@@ -7,12 +7,14 @@ steps:
       - compile
       - test-compile
       - package
-#    defines:
-#      - "-Dmaven.repo.local=/home/runner/.m2/repository"\
+    m2Path: /home/runner/.m2
+
   mavenTest:
     goals:
       - test
-#    defines:
+    m2Path: /home/runner/.m2
+
   mavenCoverage:
     goals:
       - jacoco:report
+    m2Path: /home/runner/.m2
