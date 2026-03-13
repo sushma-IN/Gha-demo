@@ -29,6 +29,8 @@ jobs:
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
+          # This is the fix: explicitly tell Piper what Maven should do
+          flags: "clean compile test-compile package"
         env:
           HOME: ${{ github.workspace }}
           PIPER_CONFIG_FILE: ".pipeline/config.yml"
@@ -37,6 +39,7 @@ jobs:
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenTest
+          flags: "test"
         env:
           HOME: ${{ github.workspace }}
 
@@ -44,23 +47,6 @@ jobs:
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenCoverage
+          flags: "jacoco:report"
         env:
           HOME: ${{ github.workspace }}
-
-      - name: Upload JAR Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: gha-demo-jar
-          path: target/*.jar
-
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: target/surefire-reports/
-
-      - name: Upload Coverage Reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-reports
-          path: target/site/jacoco/
