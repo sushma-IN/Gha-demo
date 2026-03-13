@@ -22,6 +22,8 @@ jobs:
 
       - name: Create Writable Maven Repo
         run: |
+          mkdir -p target
+          chmod -R 777 .
           mkdir -p .m2/repository
           chmod -R 777 .m2
       - name: Run Piper Maven Build
