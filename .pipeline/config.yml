@@ -1,18 +1,21 @@
 general:
   buildTool: maven
-  mavenArgs: "-Dmaven.repo.local=.m2/repository"
+  dockerImage: "maven:3.9.6-eclipse-temurin-21"
 
 steps:
   mavenExecute:
     goals:
-      - compile
-      - test-compile
-      - package
+      - "compile"
+      - "test-compile"
+      - "package"
+    m2Path: ".m2/repository"
 
   mavenTest:
     goals:
-      - test
+      - "test"
+    m2Path: ".m2/repository"
 
   mavenCoverage:
     goals:
-      - jacoco:report
+      - "jacoco:report"
+    m2Path: ".m2/repository"
