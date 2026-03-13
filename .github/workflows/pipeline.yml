@@ -32,23 +32,16 @@ jobs:
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
-        env:
-          HOME: ${{ github.workspace }}
-          PROJECT_ROOT: ${{ github.workspace }}
+          flags: "-Dmaven.repo.local=${{ github.workspace }}/.m2/repository"
 
       - name: Run Tests
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenTest
-        env:
-          HOME: ${{ github.workspace }}
-          PROJECT_ROOT: ${{ github.workspace }}
+          flags: "-Dmaven.repo.local=${{ github.workspace }}/.m2/repository"
 
       - name: Generate Coverage
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenCoverage
-          flags: "jacoco:report"
-        env:
-          HOME: ${{ github.workspace }}
-          PROJECT_ROOT: ${{ github.workspace }}
+          flags: "jacoco:report -Dmaven.repo.local=${{ github.workspace }}/.m2/repository"
