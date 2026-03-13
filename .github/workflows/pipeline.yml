@@ -18,6 +18,10 @@ jobs:
           java-version: "21"
           distribution: "temurin"
           cache: maven
+      - name: Creating Writable Maven Repo
+        run: |
+          mkdir -p .m2
+          chmod -R 777 .m2
 
       - name: Using secret as environment variable
         env:
