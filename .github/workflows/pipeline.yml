@@ -24,12 +24,10 @@ jobs:
         run: |
           mkdir -p .m2/repository
           chmod -R 777 .m2
-
       - name: Run Piper Maven Build
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
-        
         env:
           HOME: ${{ github.workspace }}
           PIPER_CONFIG_FILE: ".pipeline/config.yml"
@@ -39,7 +37,6 @@ jobs:
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenTest
-          flags: "test"
         env:
           HOME: ${{ github.workspace }}
           PIPER_goals: "test"
@@ -48,7 +45,6 @@ jobs:
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenCoverage
-          flags: "jacoco:report"
         env:
           HOME: ${{ github.workspace }}
           PIPER_goals: "jacoco:report"
