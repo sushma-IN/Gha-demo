@@ -7,14 +7,14 @@ steps:
       - compile
       - test-compile
       - package
-    m2Path: /home/runner/.m2
+    m2Path: .m2
 
   mavenTest:
     goals:
       - test
-    m2Path: /home/runner/.m2
+    m2Path: .m2
 
   mavenCoverage:
     goals:
       - jacoco:report
-    m2Path: /home/runner/.m2
+    m2Path: .m2
