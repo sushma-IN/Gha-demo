@@ -18,30 +18,23 @@ jobs:
           java-version: "21"
           distribution: "temurin"
           cache: maven
+
       - name: Creating Writable Maven Repo
         run: |
-          mkdir -p .m2
+          mkdir -p .m2/repository
           chmod -R 777 .m2
-
-      - name: Using secret as environment variable
-        env:
-          MY_SECRET: ${{ secrets.MY_SECRET }}
-        run: echo "Secret value is $MY_SECRET"
 
       - name: Run Piper Maven Build
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
-          flags: "-Dmaven.repo.local=${{ github.workspace }}/.m2/repository"
 
       - name: Run Tests
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenTest
-          flags: "-Dmaven.repo.local=${{ github.workspace }}/.m2/repository"
 
       - name: Generate Coverage
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenCoverage
-          flags: "jacoco:report -Dmaven.repo.local=${{ github.workspace }}/.m2/repository"
