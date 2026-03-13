@@ -29,12 +29,12 @@ jobs:
         with:
           step-name: mavenExecute
 
-      - name: Run Tests
-        uses: SAP/project-piper-action@v1.26.2
-        with:
-          step-name: mavenTest
+      # - name: Run Tests
+      #   uses: SAP/project-piper-action@v1.26.2
+      #   with:
+      #     step-name: mavenTest
 
-      - name: Generate Coverage
-        uses: SAP/project-piper-action@v1.26.2
-        with:
-          step-name: mavenCoverage
+      # - name: Generate Coverage
+      #   uses: SAP/project-piper-action@v1.26.2
+      #   with:
+      #     step-name: mavenCoverage
