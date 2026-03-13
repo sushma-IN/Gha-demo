@@ -20,33 +20,27 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-      - name: Create Writable Maven Repo
+      - name: Create Writable Workspace
         run: |
           mkdir -p target
           chmod -R 777 .
           mkdir -p .m2/repository
           chmod -R 777 .m2
-      - name: Run Piper Maven Build
+
+      - name: Maven Build and Test
         uses: SAP/project-piper-action@v1.26.2
         with:
           step-name: mavenExecute
-          flags: --goals clean,compile,test-compile,package
+          flags: --goals clean,install
         env:
           HOME: ${{ github.workspace }}
           PIPER_CONFIG_FILE: ".pipeline/config.yml"
 
-      - name: Run Tests
-        uses: SAP/project-piper-action@v1.26.2
-        with:
-          step-name: mavenTest
-          flags: --goals test
-        env:
-          HOME: ${{ github.workspace }}
-
       - name: Generate Coverage
         uses: SAP/project-piper-action@v1.26.2
         with:
-          step-name: mavenCoverage
+          step-name: mavenExecute
           flags: --goals jacoco:report
         env:
           HOME: ${{ github.workspace }}
+          PIPER_CONFIG_FILE: ".pipeline/config.yml"
