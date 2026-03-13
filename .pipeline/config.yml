@@ -1,5 +1,6 @@
 general:
   buildTool: maven
+  mavenArgs: "-Dmaven.repo.local=.m2/repository"
 
 steps:
   mavenExecute:
